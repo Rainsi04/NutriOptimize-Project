@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Database - NutriOptimize</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/recipes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .recipe-card {
+            position: relative;
+        }
+        
+        .view-recipe-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .view-recipe-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo-text">NutriOptimize</a>
+                <ul class="nav-links">
+                    <li><a href="recipes.html" class="active">Explore Recipes</a></li>
+                    <li><a href="recommendations.html">Get Recommendations</a></li>
+                               <li><a href="disease-recommendations.html" class="active">Disease Recommendations</a></li>
+
+                               <li><a href="index.html#features">How It Works</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="#" class="btn btn-outline">Sign In</a></li>
+                </ul>
+                <div class="mobile-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="recipe-hero">
+        <div class="container">
+            <div class="recipe-hero-content">
+                <h1>Recipe Database</h1>
+                <p>Discover optimized recipes tailored to your dietary goals</p>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search recipes...">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="recipe-filters">
+        <div class="container">
+            <div class="filter-options">
+                <div class="filter-category">
+                    <h3>Diet Type</h3>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="all">All Recipes</button>
+                        <button class="filter-btn" data-filter="high-protein">High-Protein</button>
+                        <button class="filter-btn" data-filter="low-calorie">Low-Calorie</button>
+                        <button class="filter-btn" data-filter="balanced">Balanced</button>
+                        <button class="filter-btn" data-filter="keto">Keto</button>
+                        <button class="filter-btn" data-filter="vegetarian">Vegetarian</button>
+                    </div>
+                </div>
+                <div class="filter-category">
+                    <h3>Sort By</h3>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-sort="optimized">Optimized</button>
+                        <button class="filter-btn" data-sort="time">Prep Time</button>
+                        <button class="filter-btn" data-sort="calories">Calories</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="recipes-grid-section">
+        <div class="container">
+            <div class="recipes-grid" id="recipesGrid">
+                <!-- Peanut Chickpea Protein Bow  -->
+                <div class="recipe-card" data-category="high-protein balanced" data-time="25" data-calories="390">
+                    <div class="recipe-image">
+                        <img src="images/peanut-chickpea-protein-bowl.jpeg" alt="Peanut Chickpea Protein Bowl">
+                    </div>
+                    <div class="recipe-content">
+                        <h3>Peanut Chickpea Protein Bowl</h3>
+                        <p class="recipe-description">High-protein bowl with roasted chickpeas, veggies, and creamy peanut dressing.</p>
+                        <div class="recipe-meta">
+                            <span class="prep-time"><i class="fas fa-clock"></i> 25m</span>
+                            <span class="servings"><i class="fas fa-users"></i> 2 servings</span>
+                        </div>
+                        <div class="recipe-tags">
+                            <span class="tag high-protein">High-Protein</span>
+                            <span class="tag balanced">Balanced</span>
+                        </div>
+                        <div class="nutrition-facts">
+                            <div class="nutrition-item">
+                                <span class="label">Cal</span>
+                                <span class="value">390</span>
+                            </div>
+                            <div class="nutrition-item">
+                                <span class="label">Protein</span>
+                                <span class="value">22g</span>
+                            </div>
+                            <div class="nutrition-item">
+                                <span class="label">Carbs</span>
+                                <span class="value">38g</span>
+                            </div>
+                            <div class="nutrition-item">
+                                <span class="label">Fat</span>
+                                <span class="value">16g</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary view-recipe-btn" data-recipe="grilled-chicken-quinoa-bowl">View Recipe</button>
+                    </div>
+                </div>
+
+                <!-- Mediterranean Salmon Salad -->
+                <div class="recipe-card" data-category="keto high-protein low-calorie" data-time="20" data-calories="280">
+                    <div class="recipe-image">
+                        <img src="images/mediterranean salmon salad.jpg" alt="Mediterranean Salmon Salad">
+                    </div>
+                    <div class="recipe-content">
+                        <h3>Mediterranean Salmon Salad</h3>
+                        <p class="recipe-description">Omega-3 rich salmon with fresh greens and Mediterranean flavors.</p>
+                        <div class="recipe-meta">
+                            <span class="prep-time"><i class="fas fa-clock"></i> 20m</span>
+                            <span class="servings"><i class="fas fa-users"></i> 1 serving</span>
+                        </div>
+                        <div class="recipe-tags">
+                            <span class="tag keto">Keto</span>
+                            <span class="tag high-protein">High-Protein</span>
+                            <span class="tag low-calorie">Low-Calorie</span>
+                        </div>
+                        <div class="nutrition-facts">
+                            <div class="nutrition-item">
+                                <span class="label">Cal</span>
+                                <span class="value">280</span>
+                            </div>
+                            <div class="nutrition-item">
+                                <span class="label">Protein</span>
+                                <span class="value">25g</span>
+                            </div>
+                            <div class="nutrition-item">
+                                <span class="label">Carbs</span>
+                                <span class="value">8g</span>
+                            </div>
+                            <div class="nutrition-item">
+                                <span class="label">Fat</span>
+                                <span class="value">18g</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary view-recipe-btn" data-recipe="mediterranean-salmon-salad">View Recipe</button>
+                    </div>
+                </div>
+
+                <!-- Vegetarian Buddha Bowl -->
+                <div class="recipe-card" data-category="vegetarian balanced" data-time="25" data-calories="350">
+                    <div class="recipe-image">
+                        <img src="images/vegetarian buddha bowl.jpg" alt="Vegetarian Buddha Bowl">
+                    </div>
+                    <div class="recipe-content">
+                        <h3>Vegetarian Buddha Bowl</h3>
+                        <p class="recipe-description">Plant-based protein bowl with chickpeas, sweet potato, and tahini dressing.</p>
+                        <div class="recipe-meta">
+                            <span class="prep-time"><i class="fas fa-clock"></i> 25m</span>
+                            <span class="servings"><i class="fas fa-users"></i> 2 servings</span>
+                        </div>
+                        <div class="recipe-tags">
+                            <span class="tag vegetarian">Vegetarian</span>
+                            <span class="tag balanced">Balanced</span>
+                        </div>
+                        <div class="nutrition-facts">
+                            <div class="nutrition-item">
+                                <span class="label">Cal</span>
+                                <span class="value">350</span>
+                            </div>
+                            <div class="nutrition-item">
+                                <span class="label">Protein</span>
+                                <span class="value">15g</span>
+                            </div>
+                            <div class="nutrition-item">
+                                <span class="label">Carbs</span>
+                                <span class="value">45g</span>
+                            </div>
+                            <div class="nutrition-item">
+                                <span class="label">Fat</span>
+                                <span class="value">12g</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary view-recipe-btn" data-recipe="vegetarian-buddha-bowl">View Recipe</button>
+                    </div>
+                </div>
+
+                <!-- Keto Beef Stir-Fry -->
+                <div class="recipe-card" data-category="keto high-protein" data-time="15" data-calories="320">
+                    <div class="recipe-image">
+                        <img src="images/Keto Beef Stir-Fry.jpg" alt="Keto Beef Stir-Fry">
+                    </div>
+                    <div class="recipe-content">
+                        <h3>Keto Beef Stir-Fry</h3>
+                        <p class="recipe-description">Low-carb, high-protein beef stir-fry with plenty of vegetables.</p>
+                        <div class="recipe-meta">
+                            <span class="prep-time"><i class="fas fa-clock"></i> 15m</span>
+                            <span class="servings"><i class="fas fa-users"></i> 2 servings</span>
+                        </div>
+                        <div class="recipe-tags">
+                            <span class="tag keto">Keto</span>
+                            <span class="tag high-protein">High-Protein</span>
+                        </div>
+                        <div class="nutrition-facts">
+                            <div class="nutrition-item">
+                                <span class="label">Cal</span>
+                                <span class="value">320</span>
+                            </div>
+                            <div class="nutrition-item">
+                                <span class="label">Protein</span>
+                                <span class="value">35g</span>
+                            </div>
+                            <div class="nutrition-item">
+                                <span class="label">Carbs</span>
+                                <span class="value">12g</span>
+                            </div>
+                            <div class="nutrition-item">
+                                <span class="label">Fat</span>
+                                <span class="value">14g</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary view-recipe-btn" data-recipe="keto-beef-stir-fry">View Recipe</button>
+                    </div>
+                </div>
+
+                <!-- Turkey & Avocado Wrap -->
+                <div class="recipe-card" data-category="balanced high-protein" data-time="10" data-calories="380">
+                    <div class="recipe-image">
+                        <img src="images/Turkey & Avocado Wrap.jpeg" alt="Turkey & Avocado Wrap">
+                    </div>
+                    <div class="recipe-content">
+                        <h3>Turkey & Avocado Wrap</h3>
+                        <p class="recipe-description">Balanced lunch wrap with lean turkey, avocado, and fresh vegetables.</p>
+                        <div class="recipe-meta">
+                            <span class="prep-time"><i class="fas fa-clock"></i> 10m</span>
+                            <span class="servings"><i class="fas fa-users"></i> 1 serving</span>
+                        </div>
+                        <div class="recipe-tags">
+                            <span class="tag balanced">Balanced</span>
+                            <span class="tag high-protein">High-Protein</span>
+                        </div>
+                        <div class="nutrition-facts">
+                            <div class="nutrition-item">
+                                <span class="label">Cal</span>
+                                <span class="value">380</span>
+                            </div>
+                            <div class="nutrition-item">
+                                <span class="label">Protein</span>
+                                <span class="value">32g</span>
+                            </div>
+                            <div class="nutrition-item">
+                                <span class="label">Carbs</span>
+                                <span class="value">42g</span>
+                            </div>
+                            <div class="nutrition-item">
+                                <span class="label">Fat</span>
+                                <span class="value">12g</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary view-recipe-btn" data-recipe="turkey-avocado-wrap">View Recipe</button>
+                    </div>
+                </div>
+
+                <!-- Greek Yogurt Parfait -->
+                <div class="recipe-card" data-category="high-protein balanced" data-time="5" data-calories="280">
+                    <div class="recipe-image">
+                        <img src="images/berry-parfait.jpg" alt="Greek Yogurt Parfait">
+                    </div>
+                    <div class="recipe-content">
+                        <h3>Greek Yogurt Parfait</h3>
+                        <p class="recipe-description">High-protein breakfast with Greek yogurt, berries, and granola.</p>
+                        <div class="recipe-meta">
+                            <span class="prep-time"><i class="fas fa-clock"></i> 5m</span>
+                            <span class="servings"><i class="fas fa-users"></i> 1 serving</span>
+                        </div>
+                        <div class="recipe-tags">
+                            <span class="tag high-protein">High-Protein</span>
+                            <span class="tag balanced">Balanced</span>
+                        </div>
+                        <div class="nutrition-facts">
+                            <div class="nutrition-item">
+                                <span class="label">Cal</span>
+                                <span class="value">280</span>
+                            </div>
+                            <div class="nutrition-item">
+                                <span class="label">Protein</span>
+                                <span class="value">24g</span>
+                            </div>
+                            <div class="nutrition-item">
+                                <span class="label">Carbs</span>
+                                <span class="value">36g</span>
+                            </div>
+                            <div class="nutrition-item">
+                                <span class="label">Fat</span>
+                                <span class="value">8g</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary view-recipe-btn" data-recipe="greek-yogurt-parfait">View Recipe</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="dark-background">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="brand-name">NutriOptimize</span>
+                </div>
+                <p>© 2025 NutriOptimize. Empowering healthy eating through data and science.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterButtons = document.querySelectorAll('.filter-btn[data-filter]');
+        const sortButtons = document.querySelectorAll('.filter-btn[data-sort]');
+        const recipeCards = document.querySelectorAll('.recipe-card');
+        const searchInput = document.querySelector('.search-bar input');
+        const recipesGrid = document.getElementById('recipesGrid');
+
+        let currentFilter = 'all';
+        let currentSort = 'optimized';
+
+        // Complete recipe data that matches your backend structure
+        const staticRecipes = {
+            'grilled-chicken-quinoa-bowl': {
+                _id: 1,
+                title: "Peanut Chickpea Protein Bowl",
+                description: "High-protein bowl with roasted chickpeas, veggies, and creamy peanut dressing.",
+                ingredients: [
+                    "1 can chickpeas, drained and rinsed",
+                    "2 tbsp natural peanut butter",
+                    "1 cup cooked brown rice or quinoa",
+                    "2 cups fresh spinach",
+                    "1 medium carrot, grated",
+                    "1/2 cucumber, chopped",
+                    "1/4 cup roasted peanuts",
+                    "2 tbsp soy sauce or tamari",
+                    "1 tbsp lime juice",
+                    "1 tsp honey or maple syrup"
+                ],
+                instructions: [
+                    "Cook rice or quinoa according to package instructions",
+                    "Drain and rinse chickpeas thoroughly",
+                    "In a small bowl, mix peanut butter with soy sauce, lime juice, and honey to create the dressing",
+                    "Chop all vegetables and prepare other ingredients",
+                    "In a large bowl, combine cooked grains, chickpeas, and vegetables",
+                    "Drizzle with peanut sauce and toss to combine",
+                    "Garnish with roasted peanuts and serve immediately"
+                ],
+                prepTime: 10,
+                cookTime: 15,
+                servings: 2,
+                image: "peanut-chickpea-protein-bowl.jpeg",
+                nutrition: {
+                    calories: 450,
+                    protein: 18,
+                    carbs: 65,
+                    fat: 12,
+                    fiber: 10
+                },
+                tags: ["high-protein", "balanced", "vegan"]
+            },
+            'mediterranean-salmon-salad': {
+                _id: 2,
+                title: "Mediterranean Salmon Salad",
+                description: "Omega-3 rich salmon with fresh greens and Mediterranean flavors.",
+                ingredients: [
+                    "150g salmon fillet",
+                    "4 cups mixed greens",
+                    "1/2 cucumber, sliced",
+                    "1/2 cup cherry tomatoes, halved",
+                    "1/4 red onion, thinly sliced",
+                    "2 tbsp Kalamata olives",
+                    "1 oz feta cheese, crumbled",
+                    "1 tbsp olive oil",
+                    "1 tbsp lemon juice",
+                    "1 tsp dried oregano"
+                ],
+                instructions: [
+                    "Preheat oven to 400°F (200°C)",
+                    "Season salmon with salt, pepper, and dried oregano",
+                    "Bake salmon for 12-15 minutes until flaky",
+                    "While salmon cooks, prepare salad base with mixed greens, cucumber, tomatoes, red onion, and olives",
+                    "Whisk together olive oil and lemon juice for dressing",
+                    "Flake cooked salmon over salad",
+                    "Top with crumbled feta cheese and drizzle with dressing"
+                ],
+                prepTime: 20,
+                servings: 1,
+                image: "mediterranean salmon salad.jpg",
+                nutrition: {
+                    calories: 280,
+                    protein: 25,
+                    carbs: 8,
+                    fat: 18,
+                    fiber: 6
+                },
+                tags: ["keto", "high-protein", "low-calorie"]
+            },
+            'vegetarian-buddha-bowl': {
+                _id: 3,
+                title: "Vegetarian Buddha Bowl",
+                description: "Plant-based protein bowl with chickpeas, sweet potato, and tahini dressing.",
+                ingredients: [
+                    "1 cup chickpeas, cooked",
+                    "1 medium sweet potato, cubed",
+                    "1 cup quinoa, uncooked",
+                    "2 cups mixed greens",
+                    "1 avocado, sliced",
+                    "2 tbsp tahini",
+                    "1 tbsp lemon juice",
+                    "2 tbsp water",
+                    "1 tsp maple syrup"
+                ],
+                instructions: [
+                    "Preheat oven to 400°F (200°C)",
+                    "Toss sweet potato cubes with olive oil, salt, and pepper. Roast for 20-25 minutes until tender",
+                    "Cook quinoa according to package instructions",
+                    "Make tahini dressing by whisking tahini, lemon juice, water, and maple syrup",
+                    "Assemble bowls with quinoa base, mixed greens, roasted sweet potatoes, chickpeas, and avocado",
+                    "Drizzle with tahini dressing and serve immediately"
+                ],
+                prepTime: 25,
+                servings: 2,
+                image: "vegetarian buddha bowl.jpg",
+                nutrition: {
+                    calories: 350,
+                    protein: 15,
+                    carbs: 45,
+                    fat: 12,
+                    fiber: 12
+                },
+                tags: ["vegetarian", "balanced"]
+            },
+            'keto-beef-stir-fry': {
+                _id: 4,
+                title: "Keto Beef Stir-Fry",
+                description: "Low-carb, high-protein beef stir-fry with plenty of vegetables.",
+                ingredients: [
+                    "200g beef sirloin, thinly sliced",
+                    "2 cups mixed low-carb vegetables (bell peppers, broccoli, mushrooms)",
+                    "2 tbsp coconut oil",
+                    "2 cloves garlic, minced",
+                    "1 tbsp ginger, grated",
+                    "2 tbsp soy sauce",
+                    "1 tbsp rice vinegar"
+                ],
+                instructions: [
+                    "Heat 1 tbsp coconut oil in a wok or large pan over high heat",
+                    "Stir-fry beef slices until browned, about 3-4 minutes. Remove and set aside",
+                    "Add remaining oil to the pan and stir-fry garlic and ginger for 30 seconds",
+                    "Add vegetables and stir-fry until tender-crisp, about 4-5 minutes",
+                    "Return beef to pan, add soy sauce and rice vinegar",
+                    "Stir-fry for another minute until everything is coated and heated through"
+                ],
+                prepTime: 15,
+                servings: 2,
+                image: "Keto Beef Stir-Fry.jpg",
+                nutrition: {
+                    calories: 320,
+                    protein: 35,
+                    carbs: 12,
+                    fat: 14,
+                    fiber: 4
+                },
+                tags: ["keto", "high-protein"]
+            },
+            'turkey-avocado-wrap': {
+                _id: 5,
+                title: "Turkey & Avocado Wrap",
+                description: "Balanced lunch wrap with lean turkey, avocado, and fresh vegetables.",
+                ingredients: [
+                    "1 large whole wheat tortilla",
+                    "120g sliced turkey breast",
+                    "1/2 avocado, sliced",
+                    "1/4 cup hummus",
+                    "1 cup mixed greens",
+                    "1/4 cucumber, sliced",
+                    "1/4 red bell pepper, sliced",
+                    "1 tbsp Greek yogurt",
+                    "1 tsp lemon juice"
+                ],
+                instructions: [
+                    "Lay tortilla flat and spread hummus evenly over the surface",
+                    "Layer turkey slices in the center of the tortilla",
+                    "Top with avocado, mixed greens, cucumber, and bell pepper",
+                    "In a small bowl, mix Greek yogurt with lemon juice, salt, and pepper",
+                    "Drizzle yogurt sauce over the fillings",
+                    "Fold in the sides of the tortilla and roll tightly from the bottom",
+                    "Slice in half diagonally and serve immediately"
+                ],
+                prepTime: 10,
+                servings: 1,
+                image: "Turkey & Avocado Wrap.jpeg",
+                nutrition: {
+                    calories: 380,
+                    protein: 32,
+                    carbs: 42,
+                    fat: 12,
+                    fiber: 9
+                },
+                tags: ["balanced", "high-protein"]
+            },
+            'greek-yogurt-parfait': {
+                _id: 6,
+                title: "Greek Yogurt Parfait",
+                description: "High-protein breakfast with Greek yogurt, berries, and granola.",
+                ingredients: [
+                    "1 cup Greek yogurt",
+                    "1/2 cup mixed berries (fresh or frozen)",
+                    "1/4 cup granola",
+                    "1 tbsp honey or maple syrup",
+                    "1 tbsp chia seeds",
+                    "1/4 tsp vanilla extract"
+                ],
+                instructions: [
+                    "In a small bowl, mix Greek yogurt with vanilla extract",
+                    "If using frozen berries, thaw them slightly",
+                    "In a glass or bowl, layer half of the yogurt mixture",
+                    "Add a layer of mixed berries",
+                    "Sprinkle with half of the granola and chia seeds",
+                    "Repeat layers with remaining ingredients",
+                    "Drizzle with honey or maple syrup and serve immediately"
+                ],
+                prepTime: 5,
+                servings: 1,
+                image: "berry-parfait.jpg",
+                nutrition: {
+                    calories: 280,
+                    protein: 24,
+                    carbs: 36,
+                    fat: 8,
+                    fiber: 7
+                },
+                tags: ["high-protein", "balanced"]
+            }
+        };
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const filter = this.getAttribute('data-filter');
+                
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                currentFilter = filter;
+                filterRecipes();
+            });
+        });
+
+        sortButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const sort = this.getAttribute('data-sort');
+                
+                sortButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                currentSort = sort;
+                sortRecipes();
+            });
+        });
+
+        searchInput.addEventListener('input', function() {
+            filterRecipes();
+        });
+
+        function filterRecipes() {
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            recipeCards.forEach(card => {
+                const categories = card.getAttribute('data-category');
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const description = card.querySelector('.recipe-description').textContent.toLowerCase();
+                
+                const matchesFilter = currentFilter === 'all' || categories.includes(currentFilter);
+                const matchesSearch = searchTerm === '' || 
+                                    title.includes(searchTerm) || 
+                                    description.includes(searchTerm);
+                
+                if (matchesFilter && matchesSearch) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            sortRecipes();
+        }
+
+        function sortRecipes() {
+            const visibleCards = Array.from(recipeCards).filter(card => card.style.display !== 'none');
+            
+            visibleCards.sort((a, b) => {
+                switch(currentSort) {
+                    case 'time':
+                        return parseInt(a.getAttribute('data-time')) - parseInt(b.getAttribute('data-time'));
+                    case 'calories':
+                        return parseInt(a.getAttribute('data-calories')) - parseInt(b.getAttribute('data-calories'));
+                    case 'optimized':
+                    default:
+                        return 0;
+                }
+            });
+            
+            visibleCards.forEach(card => {
+                recipesGrid.appendChild(card);
+            });
+        }
+
+        // FIXED: View Recipe button handler
+        document.querySelectorAll('.view-recipe-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const recipeSlug = this.getAttribute('data-recipe');
+                const recipeData = staticRecipes[recipeSlug];
+                
+                if (recipeData) {
+                    // Process the recipe data to ensure it has the right structure
+                    const processedRecipe = {
+                        ...recipeData,
+                        // Ensure all data is properly formatted
+                        ingredients: Array.isArray(recipeData.ingredients) ? recipeData.ingredients : ['Ingredients not available'],
+                        instructions: Array.isArray(recipeData.instructions) ? recipeData.instructions : ['Instructions not available'],
+                        // Flatten nutrition data for easy access
+                        calories: recipeData.nutrition?.calories || 'N/A',
+                        protein: recipeData.nutrition?.protein || 'N/A',
+                        carbs: recipeData.nutrition?.carbs || 'N/A',
+                        fat: recipeData.nutrition?.fat || 'N/A',
+                        fiber: recipeData.nutrition?.fiber || 'N/A'
+                    };
+                    
+                    console.log('Sending recipe to detail:', processedRecipe.title);
+                    sessionStorage.setItem('currentRecipe', JSON.stringify(processedRecipe));
+                    window.location.href = 'recipe-detail.html';
+                } else {
+                    console.error('Recipe not found:', recipeSlug);
+                    alert('Recipe details not available.');
+                }
+            });
+        });
+
+        console.log('🍽️ Recipe Database Loaded!');
+    });
+</script>
+    <script src="js/script.js"></script>
+</body>
+</html>

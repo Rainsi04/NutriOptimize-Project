@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalized Recommendations - NutriOptimize</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/recommendations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo-text">NutriOptimize</a>
+                <ul class="nav-links">
+                    <li><a href="recipes.html">Explore Recipes</a></li>
+                    <li><a href="recommendations.html" class="active">Get Recommendations</a></li>
+                                <li><a href="disease-recommendations.html" class="active">Disease Recommendations</a></li>
+
+                                <li><a href="index.html#features">How It Works</a></li>
+                    <li><a href="#" class="btn btn-outline">Sign In</a></li>
+                </ul>
+                <div class="mobile-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="recommendations-container">
+        <div class="container">
+            <div class="recommendations-hero">
+                <h1>Get Personalized Recommendations</h1>
+                <p>Tell us about yourself and we'll recommend the perfect recipes for your goals</p>
+            </div>
+
+            <form id="recommendationsForm" class="recommendations-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" name="age" min="1" max="120" required value="30">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="weight">Weight (kg)</label>
+                        <input type="number" id="weight" name="weight" min="1" max="300" step="0.1" required value="70">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="height">Height (cm)</label>
+                        <input type="number" id="height" name="height" min="50" max="250" required value="170">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="sex">Sex</label>
+                        <select id="sex" name="sex" required>
+                            <option value="">Select</option>
+                            <option value="male" >Male</option>
+                            <option value="female"selected>Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="activity">Activity Level</label>
+                        <select id="activity" name="activity" required>
+                            <option value="">Select</option>
+                            <option value="sedentary">Sedentary</option>
+                            <option value="light">Light</option>
+                            <option value="moderate" selected>Moderate</option>
+                            <option value="active">Active</option>
+                            <option value="very-active">Very Active</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="goal">Goal</label>
+                        <select id="goal" name="goal" required>
+                            <option value="">Select</option>
+                            <option value="lose">Lose Weight</option>
+                            <option value="maintain" selected>Maintain Weight</option>
+                            <option value="gain">Gain Weight</option>
+                            <option value="muscle">Build Muscle</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group full-width">
+                    <label for="diseases">Health Conditions (comma-separated)</label>
+                    <input type="text" id="diseases" name="diseases" placeholder="e.g. diabetes, heart disease, high blood pressure">
+                    <small>Leave empty if none</small>
+                </div>
+
+                <button type="submit" class="btn btn-primary recommend-btn">
+                    <i class="fas fa-magic"></i>
+                    Get Personalized Recommendations
+                </button>
+            </form>
+
+            <div id="recommendationsResults" class="recommendations-results" style="display: none;">
+                <h2>Recommended Recipes For You</h2>
+                <div id="loadingMessage" class="loading-message" style="display: none;">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <span>Analyzing your profile and finding perfect recipes...</span>
+                </div>
+                <div id="errorMessage" class="error-message" style="display: none;">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>Failed to load recipes from database</span>
+                </div>
+                <div id="userProfileSummary" class="user-profile-summary" style="display: none;"></div>
+                <div id="recipesGrid" class="recipes-grid">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="dark-background">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="brand-name">NutriOptimize</span>
+                </div>
+                <p>© 2025 NutriOptimize. Empowering healthy eating through data and science.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const ImageUtils = {
+            recipeImageMap: {
+                'Peanut Chickpea Protein Bowl': 'peanut-chickpea-protein-bowl.jpeg',
+                'Beef & Sweet Potato': 'beef-sweet-potato.jpeg',
+                'Mediterranean Quinoa Salad': 'mediterranean-quinoa.jpg',
+                'Sweet Sour Tofu': 'sweet-sour-tofu.jpg',
+                'Keto Avocado Egg Bowl': 'avocado-egg-bowl.jpg',
+                'Heart-Healthy Oatmeal': 'healthy-oatmeal.jpg',
+                'Green Power Smoothie': 'green-smoothie.jpeg',
+                'Low-Carb Chicken Stir Fry': 'chicken-stir-fry.jpg',
+                'High-Protein Lentil Soup': 'lentil-soup.jpeg',
+                'Diabetes-Friendly Berry Parfait': 'berry-parfait.jpg'
+            },
+
+            getImagePath(recipeTitle, recipeImage) {
+                // Use mapped filename if available
+                const mappedImage = this.recipeImageMap[recipeTitle];
+                if (mappedImage) {
+                    return `images/${mappedImage}`;
+                }
+                
+                // Fallback to recipe's image property
+                if (recipeImage) {
+                    return recipeImage.includes('/') ? recipeImage : `images/${recipeImage}`;
+                }
+                
+                // Ultimate fallback
+                return this.getPlaceholderImage();
+            },
+
+            getPlaceholderImage() {
+                return 'https://images.unsplash.com/photo-1495521821757-a1efb6729352?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80';
+            },
+
+            handleImageError(imgElement) {
+                console.warn('Image failed to load:', imgElement.src);
+                imgElement.src = this.getPlaceholderImage();
+                imgElement.alt = 'Recipe image not available';
+            }
+        };
+
+        // Main recommendations functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('recommendationsForm');
+            const resultsSection = document.getElementById('recommendationsResults');
+            const loadingMessage = document.getElementById('loadingMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            const userProfileSummary = document.getElementById('userProfileSummary');
+            const recipesGrid = document.getElementById('recipesGrid');
+
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const formData = {
+                    age: parseInt(document.getElementById('age').value),
+                    weight: parseFloat(document.getElementById('weight').value),
+                    height: parseInt(document.getElementById('height').value),
+                    sex: document.getElementById('sex').value,
+                    activity: document.getElementById('activity').value,
+                    goal: document.getElementById('goal').value,
+                    diseases: document.getElementById('diseases').value
+                        .split(',')
+                        .map(d => d.trim())
+                        .filter(d => d.length > 0)
+                };
+
+                await getPersonalizedRecommendations(formData);
+            });
+
+            async function getPersonalizedRecommendations(userData) {
+                // Show loading state
+                resultsSection.style.display = 'block';
+                loadingMessage.style.display = 'flex';
+                errorMessage.style.display = 'none';
+                userProfileSummary.style.display = 'none';
+                recipesGrid.innerHTML = '';
+
+                try {
+                    console.log('Sending user data to backend:', userData);
+                    
+                    // Calculate BMI for user profile
+                    const heightInMeters = userData.height / 100;
+                    const bmi = (userData.weight / (heightInMeters * heightInMeters)).toFixed(1);
+                    
+                    // Show user profile summary
+                    showUserProfileSummary(userData, bmi);
+                    
+                    // Send POST request to backend
+                    const response = await fetch('http://localhost:5000/api/recommendations', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(userData)
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`Server responded with ${response.status}: ${response.statusText}`);
+                    }
+                    
+                    const recommendedRecipes = await response.json();
+                    console.log('Received recommendations:', recommendedRecipes);
+                    
+                    loadingMessage.style.display = 'none';
+                    
+                    if (recommendedRecipes.length === 0) {
+                        showNoRecipesMessage();
+                    } else {
+                        renderRecipes(recommendedRecipes);
+                        showRecommendationSummary(recommendedRecipes, userData);
+                    }
+                    
+                } catch (error) {
+                    console.error('Error getting recommendations:', error);
+                    loadingMessage.style.display = 'none';
+                    errorMessage.style.display = 'flex';
+                    errorMessage.innerHTML = `
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <strong>Failed to load recommendations</strong>
+                            <p>${error.message}</p>
+                            <small>Make sure your backend server is running on port 5000</small>
+                        </div>
+                    `;
+                }
+            }
+
+            function showUserProfileSummary(userData, bmi) {
+                userProfileSummary.style.display = 'block';
+                userProfileSummary.innerHTML = `
+                    <div class="profile-card">
+                        <h3><i class="fas fa-user-circle"></i> Your Profile</h3>
+                        <div class="profile-details">
+                            <div class="profile-item">
+                                <span class="label">Age</span>
+                                <span class="value">${userData.age} years</span>
+                            </div>
+                            <div class="profile-item">
+                                <span class="label">Weight</span>
+                                <span class="value">${userData.weight} kg</span>
+                            </div>
+                            <div class="profile-item">
+                                <span class="label">Height</span>
+                                <span class="value">${userData.height} cm</span>
+                            </div>
+                            <div class="profile-item">
+                                <span class="label">BMI</span>
+                                <span class="value">${bmi}</span>
+                            </div>
+                            <div class="profile-item">
+                                <span class="label">Activity</span>
+                                <span class="value">${userData.activity}</span>
+                            </div>
+                            <div class="profile-item">
+                                <span class="label">Goal</span>
+                                <span class="value">${userData.goal}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function showRecommendationSummary(recipes, userData) {
+                const summary = document.createElement('div');
+                summary.className = 'recommendation-summary';
+                
+                const avgMatch = Math.round(recipes.reduce((sum, r) => sum + (r.score || 0), 0) / recipes.length);
+                const highProteinCount = recipes.filter(r => r.nutrition?.protein > 20).length;
+                const avgCalories = Math.round(recipes.reduce((sum, r) => sum + (r.nutrition?.calories || 0), 0) / recipes.length);
+                
+                summary.innerHTML = `
+                    <div class="summary-card">
+                        <h3><i class="fas fa-chart-line"></i> Your Personalized Plan</h3>
+                        <p>Based on your profile, we found ${recipes.length} recipes that match your needs.</p>
+                        <div class="summary-stats">
+                            <div class="stat">
+                                <span class="stat-value">${avgMatch}%</span>
+                                <span class="stat-label">Avg Match</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">${highProteinCount}</span>
+                                <span class="stat-label">High Protein</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">${avgCalories}</span>
+                                <span class="stat-label">Avg Calories</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                recipesGrid.parentNode.insertBefore(summary, recipesGrid);
+            }
+
+            function showNoRecipesMessage() {
+                recipesGrid.innerHTML = `
+                    <div class="no-recipes">
+                        <i class="fas fa-search"></i>
+                        <h3>No Perfect Matches Found</h3>
+                        <p>We couldn't find recipes that perfectly match your criteria. Try:</p>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Adjusting your health conditions</li>
+                            <li><i class="fas fa-check"></i> Changing your activity level</li>
+                            <li><i class="fas fa-check"></i> Exploring all recipes</li>
+                        </ul>
+                        <a href="recipes.html" class="btn btn-primary">
+                            <i class="fas fa-compass"></i> Browse All Recipes
+                        </a>
+                    </div>
+                `;
+            }
+
+            function renderRecipes(recipes) {
+                recipesGrid.innerHTML = '';
+                
+                recipes.forEach(recipe => {
+                    const recipeCard = createRecipeCard(recipe);
+                    recipesGrid.appendChild(recipeCard);
+                });
+                
+                attachRecipeEventListeners();
+            }
+
+            function createRecipeCard(recipe) {
+                const card = document.createElement('div');
+                card.className = 'recipe-card';
+                
+                const displayTags = recipe.tags?.goal?.slice(0, 2) || recipe.tags?.slice(0, 2) || [];
+                const imagePath = ImageUtils.getImagePath(recipe.title, recipe.image);
+                
+                card.innerHTML = `
+                    ${recipe.score ? `<div class="recipe-score">${Math.round(recipe.score)}% match</div>` : ''}
+                    <div class="recipe-image">
+                        <img src="${imagePath}" alt="${recipe.title}" 
+                             onerror="ImageUtils.handleImageError(this)">
+                    </div>
+                    <div class="recipe-content">
+                        <h3>${recipe.title}</h3>
+                        <p class="recipe-description">${recipe.description || 'A delicious and healthy recipe'}</p>
+                        <div class="nutrition-facts">
+                            <div class="nutrition-item">
+                                <span class="label">Cal</span>
+                                <span class="value">${recipe.nutrition?.calories || 'N/A'}</span>
+                            </div>
+                            <div class="nutrition-item">
+                                <span class="label">Protein</span>
+                                <span class="value">${recipe.nutrition?.protein || 'N/A'}g</span>
+                            </div>
+                            <div class="nutrition-item">
+                                <span class="label">Carbs</span>
+                                <span class="value">${recipe.nutrition?.carbs || 'N/A'}g</span>
+                            </div>
+                            <div class="nutrition-item">
+                                <span class="label">Fat</span>
+                                <span class="value">${recipe.nutrition?.fat || 'N/A'}g</span>
+                            </div>
+                        </div>
+                        <div class="recipe-meta">
+                            <span class="time">${(recipe.prepTime || 0) + (recipe.cookTime || 0)} mins</span>
+                            <span class="difficulty ${(recipe.difficulty || 'easy').toLowerCase()}">${recipe.difficulty || 'Easy'}</span>
+                        </div>
+                        <div class="recipe-tags">
+                            ${displayTags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>
+                        <button class="btn btn-primary view-recipe-btn" data-recipe-id="${recipe._id || recipe.id}">
+                            View Recipe
+                        </button>
+                    </div>
+                `;
+                
+                return card;
+            }
+
+            function attachRecipeEventListeners() {
+                document.querySelectorAll('.view-recipe-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const recipeId = this.getAttribute('data-recipe-id');
+                        if (recipeId) {
+                            window.location.href = `recipe-detail.html?id=${recipeId}`;
+                        } else {
+                            alert('Recipe details not available yet');
+                        }
+                    });
+                });
+            }
+
+            console.log('✅ Personalized Recommendations System Loaded');
+        });
+    </script>
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disease-Based Recommendations - NutriOptimize</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/disease-recommendations.css">
+</head>
+<!-- FULL RECIPE VIEW PANEL -->
+<div id="fullRecipeView" class="full-recipe-view" style="display:none;"></div>
+
+<body>
+
+<header>
+    <div class="container navbar">
+        <a href="index.html" class="logo-text">NutriOptimize</a>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="recipes.html">Explore Recipes</a></li>
+            <li><a href="disease-recommendations.html" class="active">Disease Recommendations</a></li>
+            <li><a href="recommendations.html">Personalized Analysis</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Sign In</a></li>
+        </ul>
+    </div>
+</header>
+
+<main class="disease-recommendations">
+
+    <!-- HERO SECTION -->
+    <section class="hero-section enhanced-hero">
+        <div class="hero-content">
+            <h1>Smart Dietary Guidance for Better Health</h1>
+            <p class="subtitle">Choose your health condition and discover recipes matched to your nutritional needs.</p>
+        </div>
+    </section>
+
+    <!-- DISEASE SELECTION -->
+    <section class="disease-selection">
+        <h2 class="section-title">Select a Health Condition</h2>
+        <div class="disease-grid" id="diseaseGrid">
+            <!-- Disease cards will load here -->
+        </div>
+    </section>
+
+    <!-- DISEASE INFORMATION -->
+    <section class="disease-info" id="diseaseInfo" style="display: none;">
+        <div class="disease-details-card">
+            <h2 id="diseaseName"></h2>
+            <p id="diseaseDescription"></p>
+
+            <div class="disease-guidelines">
+                <div class="guideline-box recommended">
+                    <h4>Recommended Foods</h4>
+                    <ul id="recommendedFoods"></ul>
+                </div>
+
+                <div class="guideline-box avoid">
+                    <h4>Foods to Avoid</h4>
+                    <ul id="foodsToAvoid"></ul>
+                </div>
+            </div>
+
+            <p class="guideline-text">
+                <strong>Nutritional Guidelines:</strong>
+                <span id="guidelinesText"></span>
+            </p>
+        </div>
+    </section>
+
+    <!-- RECOMMENDED RECIPES -->
+    <section class="recommended-recipes" id="recommendedRecipes" style="display: none;">
+        <h2 class="section-title">Recommended Recipes</h2>
+        <div class="recipes-container" id="recipesContainer">
+           <!-- inline recipe panel (must be OUTSIDE recipe list) -->
+    <div id="selectedRecipePanel" class="recipe-detail-panel" style="display:none; margin-top:40px;">
+        
+    </div>
+    </section>
+
+</main>
+
+
+<script src="js/disease-recommendations.js?v=2"></script>
+
+</body>
+</html>

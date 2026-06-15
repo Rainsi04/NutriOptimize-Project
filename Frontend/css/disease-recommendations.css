@@ -1,0 +1,343 @@
+/* ================================
+   PAGE LAYOUT
+=================================== */
+.disease-recommendations {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* ================================
+   HERO SECTION (Upgraded)
+=================================== */
+.enhanced-hero {
+    padding: 120px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #f0fff4, #dfffe3);
+    border-radius: 20px;
+    margin-bottom: 60px;
+}
+
+.enhanced-hero h1 {
+    color: #2c5530;
+    font-size: 2.8rem;
+    font-weight: 700;
+}
+
+.subtitle {
+    color: #666;
+    font-size: 1.2rem;
+}
+
+/* ================================
+   SECTION TITLES
+=================================== */
+.section-title {
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 600;
+    color: #2c5530;
+}
+
+/* ================================
+   DISEASE GRID
+=================================== */
+.disease-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+/* ================================
+   DISEASE CARD
+=================================== */
+.disease-card {
+    background: #fff;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border: 2px solid transparent;
+}
+
+.disease-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    border-color: #4CAF50;
+    background: #f6fff8;
+}
+
+.disease-card.active {
+    border-color: #4CAF50;
+    background: #f8fff8;
+}
+
+.disease-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.disease-card-content {
+    padding: 1.2rem;
+}
+
+.disease-card h3 {
+    font-size: 1.3rem;
+    color: #2c5530;
+    margin-bottom: 0.4rem;
+}
+
+.disease-card p {
+    color: #666;
+    line-height: 1.4;
+}
+
+/* ================================
+   DISEASE INFO PANEL
+=================================== */
+.disease-info {
+    background: linear-gradient(135deg, #f8fff8 0%, #e8f5e8 100%);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    border-left: 5px solid #4CAF50;
+}
+
+.disease-details h2 {
+    color: #2c5530;
+    margin-bottom: 1rem;
+}
+
+/* ================================
+   GUIDELINES GRID
+=================================== */
+.disease-guidelines {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.foods-recommended, .foods-avoid {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.foods-recommended h4, 
+.foods-avoid h4 {
+    margin-bottom: 0.8rem;
+    color: #2c5530;
+}
+
+.foods-recommended ul, 
+.foods-avoid ul {
+    list-style: none;
+    padding: 0;
+}
+
+.foods-recommended li,
+.foods-avoid li {
+    padding: 0.4rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.foods-recommended li:last-child,
+.foods-avoid li:last-child {
+    border-bottom: none;
+}
+
+/* Nutritional Guidelines Box */
+.nutritional-guidelines {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-left: 4px solid #4CAF50;
+    margin-top: 1rem;
+}
+
+/* ================================
+   RECIPE SECTION
+=================================== */
+.recommended-recipes h2 {
+    color: #2c5530;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+/* Modern Recipe Grid */
+.recipes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+/* ================================
+   RECIPE CARD
+=================================== */
+.recipe-card {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: 0.25s ease;
+    padding: 0;
+}
+
+.recipe-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+}
+
+/* ================================
+   ⭐ FIXED IMAGE ISSUE (APPLIED HERE)
+=================================== */
+.recipe-image,
+.recipe-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    border-radius: 0;
+}
+
+/* ================================
+   MESSAGES & WARNINGS
+=================================== */
+.loading, .no-recipes {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+}
+
+.loading-state {
+    text-align: center;
+    padding: 3rem;
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.error-message {
+    text-align: center;
+    padding: 3rem;
+    background: #fff3f3;
+    border: 2px solid #ff6b6b;
+    border-radius: 10px;
+    margin: 2rem 0;
+}
+
+.error-message h3 {
+    color: #d63031;
+}
+
+.warning-message,
+.connection-warning {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    color: #856404;
+    padding: 1rem;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* ================================
+   RESPONSIVE STYLES
+=================================== */
+@media (max-width: 768px) {
+    .disease-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .disease-guidelines {
+        grid-template-columns: 1fr;
+    }
+
+    .enhanced-hero h1 {
+        font-size: 2.1rem;
+    }
+
+    .recipes-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ================================
+   FULL RECIPE VIEW PANEL
+=================================== */
+.full-recipe-view {
+    width: 100%;
+    min-height: 100vh;
+    background: #fff;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+.full-recipe-view img.banner {
+    width: 100%;
+    border-radius: 14px;
+    margin-bottom: 20px;
+}
+
+.full-recipe-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.full-recipe-desc {
+    font-size: 16px;
+    opacity: 0.8;
+    margin-bottom: 20px;
+}
+
+.nutrition-box {
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+}
+
+.nutr-item {
+    text-align: center;
+}
+
+.two-columns {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.col {
+    width: 50%;
+    background: #fafafa;
+    padding: 20px;
+    border-radius: 14px;
+    border: 1px solid #e3e3e3;
+}
+
+.col h3 {
+    margin-bottom: 10px;
+}
+
+.col ul, .col ol {
+    margin-left: 20px;
+}
+
+.back-btn {
+    margin-top: 25px;
+    padding: 10px 16px;
+    background: #0d6efd;
+    border: none;
+    font-size: 16px;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+}
